@@ -1,0 +1,50 @@
+#pragma version 3
+txn ApplicationID
+int 0
+==
+bnz main_l4
+txn OnCompletion
+int NoOp
+==
+bnz main_l3
+err
+main_l3:
+txn NumAppArgs
+int 1
+==
+assert
+global Round
+byte "voting_start_round"
+app_global_get
+>=
+assert
+txna ApplicationArgs 0
+txna ApplicationArgs 0
+app_global_get
+int 1
++
+app_global_put
+int 1
+return
+main_l4:
+txn NumAppArgs
+int 0
+==
+assert
+byte "candidate_1"
+int 0
+app_global_put
+byte "candidate_2"
+int 0
+app_global_put
+byte "candidate_3"
+int 0
+app_global_put
+byte "voting_start_round"
+int 1
+app_global_put
+byte "voting_end_round"
+int 1000
+app_global_put
+int 1
+return
