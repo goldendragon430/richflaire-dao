@@ -62,9 +62,9 @@ on_claim_rewards = Seq([
         InnerTxnBuilder.SetFields(
             {
                 TxnField.type_enum: TxnType.Payment,
-                TxnField.amount: Txn.application_args[1],
+                TxnField.amount: Btoi(Txn.application_args[1]),
                 TxnField.receiver: Txn.sender(),
-                TxnField.sender:Txn.application_args[2],
+                TxnField.sender:Txn.accounts[1],
             }
         ),
         InnerTxnBuilder.Submit(),
@@ -82,9 +82,9 @@ on_withdraw = Seq([
         InnerTxnBuilder.SetFields(
             {
                 TxnField.type_enum: TxnType.Payment,
-                TxnField.amount: Txn.application_args[1],
+                TxnField.amount: Btoi(Txn.application_args[1]),
                 TxnField.receiver: Txn.sender(),
-                TxnField.sender:Txn.application_args[2],
+                TxnField.sender:Txn.accounts[1],
             }
         ),
         InnerTxnBuilder.Submit(),

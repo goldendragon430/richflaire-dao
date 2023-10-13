@@ -1,7 +1,13 @@
-import { lazy } from "react"
-import Profile from "../views/profile"
-import { MessageFilled } from "@ant-design/icons"
-import {MoreIcon,ProfileIcon,LockersIcon ,ProposalsIcon,TreasuryIcon} from "../layout/icons"
+import { lazy } from "react";
+import Profile from "../views/profile";
+import { MessageFilled } from "@ant-design/icons";
+import {
+    MoreIcon,
+    ProfileIcon,
+    LockersIcon,
+    ProposalsIcon,
+    TreasuryIcon
+} from "../layout/icons";
 
 const routes = [
     // {
@@ -28,82 +34,81 @@ const routes = [
     //     hidden: false,
     //     icon: <ProfileIcon />,
     // },
+    // {
+    //     path: "/profile",
+    //     name: "/profile",
+    //     til: "Profile",
+    //     element: lazy(() => import("../views/profile")),
+    //     hidden: false,
+    //     icon: <ProfileIcon />
+    // },
     {
-        path: '/profile',
-        name: '/profile',
-        til: 'Profile',
-        element: Profile,
+        path: "/proposals",
+        name: "/proposals",
+        til: "Proposals",
+        element: lazy(() => import("../views/proposals")),
         hidden: false,
-        icon: <ProfileIcon />,
+        icon: <ProposalsIcon />
     },
     {
-        path: '/proposals',
-        name: '/proposals',
-        til: 'Proposals',
-        element: lazy(() => import('../views/proposals')),
+        path: "/lockers",
+        name: "/lockers",
+        til: "Lockers",
+        element: lazy(() => import("../views/lockers")),
         hidden: false,
-        icon: <ProposalsIcon />,
+        icon: <LockersIcon />
     },
     {
-        path: '/lockers',
-        name: '/lockers',
-        til: 'Lockers',
-        element: lazy(() => import('../views/lockers')),
+        path: "/treasury",
+        name: "/treasury",
+        til: "Treasury",
+        element: lazy(() => import("../views/treasury")),
         hidden: false,
-        icon: <LockersIcon />,
+        icon: <TreasuryIcon />
     },
     {
-        path: '/treasury',
-        name: '/treasury',
-        til: 'Treasury',
-        element: lazy(() => import('../views/treasury')),
+        path: "/more",
+        name: "/more",
+        til: "More",
+        element: lazy(() => import("../views/more")),
         hidden: false,
-        icon: <TreasuryIcon />,
+        icon: <MoreIcon />
     },
     {
-        path: '/more',
-        name: '/more',
-        til: 'More',
-        element: lazy(() => import('../views/more')),
-        hidden: false,
-        icon: <MoreIcon />,
-    },
-    {
-        path: '*',
-        name: '404',
-        element: lazy(() => import('../views/404')),
+        path: "*",
+        name: "404",
+        element: lazy(() => import("../views/404")),
         hidden: true,
-        icon: <MessageFilled />,
+        icon: <MessageFilled />
     },
     {
-        path: '/locker_details',
-        name: 'locker_details',
-        element: lazy(() => import('../views/locker_details')),
+        path: "/locker_details",
+        name: "locker_details",
+        element: lazy(() => import("../views/locker_details")),
         hidden: true,
-        icon: <MessageFilled />,
+        icon: <MessageFilled />
     },
     {
-        path: '/privacy_policy',
-        name: 'privacy_policy',
-        element: lazy(() => import('../views/privacy_policy')),
+        path: "/privacy_policy",
+        name: "privacy_policy",
+        element: lazy(() => import("../views/privacy_policy")),
         hidden: true,
-        icon: <MessageFilled />,
+        icon: <MessageFilled />
     },
     {
-        path: '/terms_of_service',
-        name: 'terms_of_service',
-        element: lazy(() => import('../views/terms_of_service')),
+        path: "/terms_of_service",
+        name: "terms_of_service",
+        element: lazy(() => import("../views/terms_of_service")),
         hidden: true,
-        icon: <MessageFilled />,
+        icon: <MessageFilled />
     },
     {
-        path: '/login',
-        name: 'login',
-        element: lazy(() => import('../views/login')),
+        path: "/login",
+        name: "login",
+        element: lazy(() => import("../views/login")),
         hidden: true,
-        icon: <MoreIcon />,
-    },
-]
+        icon: <MoreIcon />
+    }
+];
 
-
-export default routes
+export default routes;

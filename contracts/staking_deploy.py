@@ -1,30 +1,19 @@
-import algosdk
-from algosdk.wallet import Wallet
-from algosdk import account, encoding, algod, mnemonic
+from algosdk import account, mnemonic, transaction
 from algosdk.v2client import algod
-from algosdk.future import transaction
-from algosdk.v2client.models.dryrun_source import DryrunSource
-from base64 import b64decode
 
 # Set your API endpoint and your API key, as well as your private key/mnemonic    
 algod_address = "https://testnet-algorand.api.purestake.io/ps2"
-algod_token = "E2QQNNiByE4AGYjWxZcfY1AQrOKSigCu1Mctc8F5"
-headers = {
-    "X-API-Key": algod_token,
-}   
+algod_token = "TgxWI5WBWNUlKgWik5j4ayezLDkb71J5VTw1mzd6"
+
 # Create an algod client instance
-algod_client = algod.AlgodClient(algod_token, algod_address, headers)
-print("Versions:", algod_client.versions())
+algod_client = algod.AlgodClient(algod_token, algod_address)
 # Add your private key/mnemonic here
 private_key = mnemonic.to_private_key("route pair tourist fun warrior ready collect cloud nasty guess universe transfer agree vendor discover whisper fancy champion lunch black shoot canoe glow able feed")
 
 # Get account address, verify balance
 my_address = account.address_from_private_key(private_key)
 # my_address = "G2XVAXJPP62LSDLC2PGFDFBKTT2A3JRXAAMPR4NDSEW3GKW6M6HS4HC7CA"
-print("My address:", my_address)
-
-account_info = algod_client.account_info(my_address)
-print("My Algo balance: {} microAlgos".format(account_info.get('amount')))
+print("My address:", )
 
 # Replace with the output addresses from the TEAL compilation
 
@@ -32,8 +21,8 @@ def read_teal_bytecode(file_path):
     with open(file_path, "rb") as f:
         return f.read()
 
-approval_program_bytecode = read_teal_bytecode("staking_contract.teal.tok")
-clear_program_bytecode = read_teal_bytecode("staking_contract.teal_clear.tok")
+approval_program_bytecode = read_teal_bytecode("staking_contract.teal")
+clear_program_bytecode = read_teal_bytecode("clear.teal")
 
 # Create the smart contract
 params = algod_client.suggested_params()

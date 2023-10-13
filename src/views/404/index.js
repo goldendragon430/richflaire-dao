@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  return (
-    <div>
-      6666
-    </div>
-  )
+    const navigate = useNavigate();
+    useEffect(() => {
+        navigate("/proposals");
+    }, []);
+
+    return <></>;
 }

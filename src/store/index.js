@@ -1,26 +1,24 @@
-import { createStore , combineReducers} from "redux";
+import { createStore, combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import {flagReducer} from './reducers/flag'
-
+import { flagReducer } from "./reducers/flag";
+import { walletReducer } from "./reducers/wallet";
 
 const persistConfig = {
     key: "root",
-    storage,
+    storage
     //blacklist: ["loading"], //设置某个reducer数据不持久化，
     //注意单词的拼写！我就因为写错单词，找了半天,55555~
-  };
-const reducers =  combineReducers({
+};
+const reducers = combineReducers({
     flagReducer,
-})
+    walletReducer
+});
 
 const myPersistReducer = persistReducer(persistConfig, reducers);
 
-const store = createStore(myPersistReducer)
+const store = createStore(myPersistReducer);
 
 const persistor = persistStore(store);
 
-
-export {store,persistor}
-
-
+export { store, persistor };

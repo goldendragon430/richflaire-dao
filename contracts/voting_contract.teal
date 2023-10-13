@@ -1,0 +1,56 @@
+#pragma version 5
+txn ApplicationID
+int 0
+==
+bnz main_l6
+txn OnCompletion
+int OptIn
+==
+bnz main_l5
+txn OnCompletion
+int NoOp
+==
+bnz main_l4
+err
+main_l4:
+txn NumAppArgs
+int 1
+==
+assert
+txn Sender
+byte "vote_candidate"
+app_local_get
+int 0
+==
+assert
+txn Sender
+byte "vote_candidate"
+txna ApplicationArgs 0
+app_local_put
+txna ApplicationArgs 0
+txna ApplicationArgs 0
+app_global_get
+int 1
++
+app_global_put
+int 1
+return
+main_l5:
+int 1
+return
+main_l6:
+txn NumAppArgs
+int 0
+==
+assert
+byte "candidate_1"
+int 0
+app_global_put
+byte "candidate_2"
+int 0
+app_global_put
+byte "candidate_3"
+int 0
+app_global_put
+int 1
+return

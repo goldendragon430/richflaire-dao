@@ -58,13 +58,13 @@ on_rewards = Seq([
 on_claim_rewards = Seq([
     Assert(Txn.application_args[0] == Bytes("claim_rewards")),
     Assert(Btoi(Txn.application_args[1])>= min_claim_amt),
-     InnerTxnBuilder.Begin(),
+    InnerTxnBuilder.Begin(),
         InnerTxnBuilder.SetFields(
             {
                 TxnField.type_enum: TxnType.Payment,
-                TxnField.amount: Txn.application_args[1],
+                TxnField.amount: Btoi(Txn.application_args[1]),
                 TxnField.receiver: Txn.sender(),
-                TxnField.sender:Txn.application_args[2],
+                TxnField.sender:Txn.accounts[1],
             }
         ),
         InnerTxnBuilder.Submit(),
@@ -78,13 +78,13 @@ on_withdraw = Seq([
     Assert(Txn.application_args[0] == Bytes("withdraw")),
     # Assert(Txn.sender() == Txn.application_args[1]),
     Assert(Btoi(Txn.application_args[1]) > min_withdraw_amt),
-     InnerTxnBuilder.Begin(),
+    InnerTxnBuilder.Begin(),
         InnerTxnBuilder.SetFields(
             {
                 TxnField.type_enum: TxnType.Payment,
-                TxnField.amount: Txn.application_args[1],
+                TxnField.amount: Btoi(Txn.application_args[1]),
                 TxnField.receiver: Txn.sender(),
-                TxnField.sender:Txn.application_args[2],
+                TxnField.sender:Txn.accounts[1],
             }
         ),
         InnerTxnBuilder.Submit(),
@@ -104,8 +104,6 @@ program = Cond(
 )
 
 if __name__ == "__main__":
-    with open("locker_contract.teal", "w") as f:
+    with open("staking_contract.teal", "w") as f:
         compiled = compileTeal(program, mode=Mode.Application, version=5)
         f.write(compiled)
-
-

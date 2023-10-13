@@ -1,10 +1,6 @@
-import algosdk
-from algosdk.wallet import Wallet
-from algosdk import account, encoding, algod, mnemonic
+from algosdk import account, mnemonic, transaction
 from algosdk.v2client import algod
-from algosdk.future import transaction
-from algosdk.v2client.models.dryrun_source import DryrunSource
-from base64 import b64decode
+from algosdk.wallet import Wallet
 
 # Set your API endpoint and your API key, as well as your private key/mnemonic    
 algod_address = "https://testnet-algorand.api.purestake.io/ps2"
@@ -32,8 +28,8 @@ def read_teal_bytecode(file_path):
     with open(file_path, "rb") as f:
         return f.read()
 
-approval_program_bytecode = read_teal_bytecode("approval.teal.tok")
-clear_program_bytecode = read_teal_bytecode("clear.teal.tok")
+approval_program_bytecode = read_teal_bytecode("voting.teal")
+clear_program_bytecode = read_teal_bytecode("clear.teal")
 
 # Create the smart contract
 params = algod_client.suggested_params()
